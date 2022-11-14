@@ -4,57 +4,57 @@ import PokemonCard from '../components/PokemonCard'
 import { usePokemon, usePokemonList } from '../hooks/pokemon'
 
 const PokemonList = () => {
-  const [currentPage, setCurrentPage] = useState(24);
-  const { pokemonList } = usePokemon()
-  const { isLoading, fetchNextPage } = usePokemonList()
+  const { pokemonList, page, setPage } = usePokemon()
+  const { isLoading, fetchNextPage } = usePokemonList(page)
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 24)
-    fetchNextPage({ pageParam: currentPage })
+    setPage(page + 24)
+    fetchNextPage({ pageParam: page })
   }
 
   return (
-    <InfiniteScroll
-      style={{
-        width: "100%"
-      }}
-      dataLength={pokemonList.length} //This is important field to render the next data
-      next={handleNextPage}
-      hasMore={true}
-      loader={<h4>Loading...</h4>}
-      endMessage={
-        <p style={{ textAlign: 'center' }}>
-          <b>Fim</b>
-        </p>
-      }
-    >
-      <div
-        className="
-          w-full
-          flex
-          justify-center
-        "
+    <div className='w-full'>
+      <InfiniteScroll
+        style={{
+          width: "100%"
+        }}
+        dataLength={pokemonList.length}
+        next={handleNextPage}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Fim</b>
+          </p>
+        }
       >
         <div
           className="
             w-full
-            max-w-[1000px]
-            mx-auto
-            grid
-            grid-cols-3
-            grid-rows-1
-            gap-8
+            flex
+            justify-center
           "
         >
-          
+          <div
+            className="
+              w-full
+              max-w-[1000px]
+              mx-auto
+              grid
+              grid-cols-3
+              grid-rows-1
+              gap-8
+            "
+          >
             {pokemonList.map(e =>
               <PokemonCard 
                 name={e.name}
               />
             )}
+          </div>
         </div>
-      </div>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </div>
   )
 }
 

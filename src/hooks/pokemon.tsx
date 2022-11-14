@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, Dispatch } from 'react'
+import { useState, createContext, useContext, useReducer, Dispatch } from 'react'
 import { useInfiniteQuery, useQuery } from 'react-query'
 
 import { GET_POKEMON_LIST, GET_POKEMON_SINGLE } from '../services/pokemon'
@@ -50,10 +50,11 @@ const PokemonDispatchContext = createContext({} as InitContextProps);
 
 const PokemonProvider = ({ children }: Props) => {
     const [state, dispatch] = useReducer(pokemonReducer, { pokemonList: [], pokemon: {} })
+		const [page, setPage] = useState(24);
 		const value = { state, dispatch };
   
     return (
-			<PokemonStateContext.Provider value={{ ...state }}>
+			<PokemonStateContext.Provider value={{ ...state, page, setPage }}>
 					<PokemonDispatchContext.Provider value={value}>{children}</PokemonDispatchContext.Provider>
 			</PokemonStateContext.Provider>
     )
@@ -93,7 +94,7 @@ const usePokemonList = () => {
 const usePokemonSingle = (name) => {
 	const dispatch = useDispatch()
 
-	return useQuery(['pokemon'], () => GET_POKEMON_SINGLE(name), {
+	return useQuery('pokemon', () => GET_POKEMON_SINGLE(name), {
 			onSuccess: (data) => {
 				console.log('GET_POKEMON_SINGLE', name, data)
 				dispatch({ type: ACTION_TYPES.VIEW, data })

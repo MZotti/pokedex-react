@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useQuery } from 'react-query'
-import { firstLetterUperr } from '../functions/firstLetterUpper'
+import { Link } from 'react-router-dom'
+import { firstLetterUpper } from '../functions/firstLetterUpper'
 import { usePokemonSingle } from '../hooks/pokemon'
 import { GET_POKEMON_SINGLE } from '../services/pokemon'
 import types from '../variables/types'
@@ -41,7 +42,8 @@ const PokemonCard = (props: Props) => {
         <></>
         :
         <>
-          <div 
+          <Link
+            to={`../pokemon/${props.name}`}
             className="
               absolute
               w-full
@@ -85,9 +87,9 @@ const PokemonCard = (props: Props) => {
               :
               <>
                 <span className="font-bold"># {pokemon?.id}</span>
-                <span className="text-lg">{firstLetterUperr(pokemon?.name)}</span>
+                <span className="text-lg">{firstLetterUpper(pokemon?.name)}</span>
                 <span>{pokemon?.types.map(tp => 
-                  <>{`${firstLetterUperr(tp.type.name)} `}</>
+                  <>{`${firstLetterUpper(tp.type.name)} `}</>
                 )}</span>
               </>
             }

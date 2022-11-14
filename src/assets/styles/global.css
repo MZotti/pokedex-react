@@ -1,7 +1,14 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: pokeFont;
+    src: url(../fonts/pokefont.ttf);
+}
+
 body {
+  font-family: pokeFont !important;
   @apply bg-gray-100
 }

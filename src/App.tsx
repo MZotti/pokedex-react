@@ -7,6 +7,8 @@ function App() {
   return (
     <div
       className='
+        flex
+        justify-center
         w-full
         p-8
       '
