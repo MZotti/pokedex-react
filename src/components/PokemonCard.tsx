@@ -11,19 +11,19 @@ type Props = {
   name: String
 }
 
-const PokemonCard = (props: Props) => {
+const PokemonCard = ({name}: Props) => {
   const [pokemon, setPokemon] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
   React.useEffect(() => {
-    const loadCard = async (name) => {
-      const data = await GET_POKEMON_SINGLE(name)
+    const loadCard = async (pokeName: String) => {
+      const data = await GET_POKEMON_SINGLE(pokeName)
       setPokemon(data);
       setIsLoading(false)
     }
 
-    loadCard(props.name);
-  }, [props])
+    loadCard(name);
+  }, [name])
 
   return (
     <div
@@ -43,7 +43,7 @@ const PokemonCard = (props: Props) => {
         :
         <>
           <Link
-            to={`../pokemon/${props.name}`}
+            to={`../pokemon/${name}`}
             className="
               absolute
               w-full

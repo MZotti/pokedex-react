@@ -5,7 +5,7 @@ import { usePokemon, usePokemonList } from '../hooks/pokemon'
 
 const PokemonList = () => {
   const { pokemonList, page, setPage } = usePokemon()
-  const { isLoading, fetchNextPage } = usePokemonList(page)
+  const { isLoading, fetchNextPage } = usePokemonList()
 
   const handleNextPage = () => {
     setPage(page + 24)

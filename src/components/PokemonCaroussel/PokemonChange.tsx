@@ -6,7 +6,7 @@ const PokemonChange = () => {
   const [pokemon, setPokemon] = useState(null)
 
   const loadPokemon = async () => {
-    const id = Math.floor(Math.random() * (905 - 1) + 1)
+    const id: Number = Math.floor(Math.random() * (905 - 1) + 1)
     const data = await GET_POKEMON_SINGLE(id)
     setPokemon(data)
     setTimeout(() => {

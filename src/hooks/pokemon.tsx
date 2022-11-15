@@ -37,6 +37,10 @@ interface Actions {
 
 interface InitContextProps {
   state: any;
+	pokemonList: Array<Object>
+	pokemon: Object
+	page: number
+	setPage: Function
   dispatch: Dispatch<Actions>;
 }
 

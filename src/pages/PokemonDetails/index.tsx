@@ -27,24 +27,24 @@ const PokemonDetails = () => {
         px-auto
       "
     >
-      <div className="
-        absolute
-        flex
-        justify-center
-        items-center
-        w-[80px]
-        h-[40px]
-        rounded-full
-        bg-white
-        top-[10px]
-        right-[10px]
-        cursor-pointer
-      "
-      >
-        <Link to="../list">
-          Back
-        </Link>
-      </div>
+      <Link to="../list">
+        <div className="
+          absolute
+          flex
+          justify-center
+          items-center
+          w-[80px]
+          h-[40px]
+          rounded-full
+          bg-white
+          top-[10px]
+          right-[10px]
+          cursor-pointer
+        "
+        >
+            Back
+        </div>
+      </Link>
       <div className="
         absolute
         w-[144px]

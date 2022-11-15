@@ -1,5 +1,13 @@
+type Props = {
+  stats: Array<Stat>
+}
 
-const PokemonStats = ({stats}) => {
+type Stat = {
+  base_stat: Number
+  stat: Object
+}
+
+const PokemonStats = ({stats}: Props) => {
   return (
     <div className="
       w-full
