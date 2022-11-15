@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PokemonCard from '../components/PokemonCard'
-import { usePokemon, usePokemonList } from '../hooks/pokemon'
+import { clearPokemon, usePokemon, usePokemonList } from '../hooks/pokemon'
 
 const PokemonList = () => {
   const { pokemonList, page, setPage } = usePokemon()
   const { isLoading, fetchNextPage } = usePokemonList()
 
   const handleNextPage = () => {
-    setPage(page + 24)
     fetchNextPage({ pageParam: page })
   }
 

@@ -11,14 +11,12 @@ const ACTION_TYPES = {
 const pokemonReducer = (state, action) => {
 	switch (action.type) {
 		case ACTION_TYPES.LIST: {
-			console.log('entrou list')
 			return { 
 				...state, 
-				pokemonList: action.data
+				pokemonList: [...state.pokemonList, ...action.data]
 			}
 		}
 		case ACTION_TYPES.VIEW: {
-			console.log('entrou view')
 			return { 
 				...state, 
 				pokemon: action.data
@@ -54,7 +52,7 @@ const PokemonDispatchContext = createContext({} as InitContextProps);
 
 const PokemonProvider = ({ children }: Props) => {
     const [state, dispatch] = useReducer(pokemonReducer, { pokemonList: [], pokemon: {} })
-		const [page, setPage] = useState(24);
+		const [page, setPage] = useState(0);
 		const value = { state, dispatch };
   
     return (
@@ -84,12 +82,14 @@ const useDispatch = () => {
 
 const usePokemonList = () => {
 	const dispatch = useDispatch()
+	const { page, setPage } = usePokemon()
 
-	return useInfiniteQuery('pokemonList', (pageParam) => GET_POKEMON_LIST(pageParam), {
+	return useInfiniteQuery('pokemonList', () =>  GET_POKEMON_LIST(page), {
 			getNextPageParam: (offset) => offset,
 			onSuccess: ({pages}) => {
-				let data = []
-				pages.map(el => data = [...data, ...el])
+				let data = pages.slice(-1);
+				data = [...data[0]]
+				setPage(page + 24)
 				dispatch({ type: ACTION_TYPES.LIST, data })
 			},
 	})
@@ -100,8 +100,8 @@ const usePokemonSingle = (name) => {
 
 	return useQuery('pokemon', () => GET_POKEMON_SINGLE(name), {
 			onSuccess: (data) => {
-				console.log('GET_POKEMON_SINGLE', name, data)
 				dispatch({ type: ACTION_TYPES.VIEW, data })
+
 			},
 	})
 }

@@ -3,7 +3,7 @@ import { API } from './api'
 const POKEMON_ROUTE = '/pokemon';
 const TYPES_ROUTE = '/type';
 
-export const GET_POKEMON_LIST = async ({pageParam = 0}) => {
+export const GET_POKEMON_LIST = async (pageParam = 0) => {
   const { data } = await API.get(`${POKEMON_ROUTE}/?offset=${pageParam}&limit=${24}`);
 
   return data.results
