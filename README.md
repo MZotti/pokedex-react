@@ -8,3 +8,13 @@ This project is made with:
   <li>Vite.js</li>
   <li>Tailwind CSS</li>
 </ul>
+
+To run, execute:
+
+### `npm i`
+
+Then:
+
+### `npm run dev`
+
+The default url is: [http://localhost:5173](http://localhost:5173)
